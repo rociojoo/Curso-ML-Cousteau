@@ -1,0 +1,10 @@
+name: tutorial-demo
+title:
+username:
+account: rocioj
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3787126
+bundleId: 4341434
+url: https://rocioj.shinyapps.io/tutorial-demo/
+when: 1615696421.00959
