@@ -126,7 +126,7 @@ Baja California Sur, calcular el valor de correlación de Spearman.
 
 
 ```{r na-corr, exercise=TRUE}
-# head(read.table(here("datos","temp_hum.txt"), header = TRUE, sep = ";"))
+head(read.table(here("datos","temp_hum.txt"), header = TRUE, sep = ";"))
 ```
 
 
