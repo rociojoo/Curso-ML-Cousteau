@@ -14,7 +14,7 @@ runtime: shiny_prerendered
 library(learnr)
 gradethis::gradethis_setup()
 knitr::opts_chunk$set(echo = FALSE)
-library(here)
+library(readr)
 ```
 
 
@@ -120,13 +120,13 @@ quiz(
 
 ## Datos faltantes
 
-Con los siguientes vectores de datos de temperatura media y humedad en La Paz,
-Baja California Sur, calcular el valor de correlación de Spearman.
+Descargar [datos de temperatura media y humedad en La Paz, Baja California Sur](https://github.com/rociojoo/Curso-ML-Cousteau/blob/main/datos/temp_hum.txt), 
+y calcular el valor de correlación de Spearman.
 
 
 
 ```{r na-corr, exercise=TRUE}
-head(read.table(here("datos","temp_hum.txt"), header = TRUE, sep = ";"))
+(datos <- read_delim("https://raw.githubusercontent.com/rociojoo/Curso-ML-Cousteau/main/datos/temp_hum.txt", delim = ";", col_names = TRUE) )
 ```
 
 
