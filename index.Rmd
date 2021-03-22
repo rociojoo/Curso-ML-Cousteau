@@ -18,8 +18,10 @@ Curso organizado por:
 options(htmltools.dir.version = FALSE)
 ```
 
-```{r, out.width = "70%", fig.align='center', echo=FALSE}
-# knitr::include_graphics("./img/logo-cientifica.png")
+<br>
+
+```{r, out.width = "60%", fig.align='center', echo=FALSE}
+knitr::include_graphics("./img/logo_cousteau.png")
 ```
 
 ---

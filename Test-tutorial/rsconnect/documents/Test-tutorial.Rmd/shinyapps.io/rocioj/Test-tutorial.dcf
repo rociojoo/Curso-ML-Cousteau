@@ -1,0 +1,12 @@
+name: Test-tutorial
+title: Test-tutorial
+username:
+account: rocioj
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3830281
+bundleId: 4378130
+url: https://rocioj.shinyapps.io/Test-tutorial/
+when: 1616386242.28416
+asMultiple: FALSE
+asStatic: FALSE

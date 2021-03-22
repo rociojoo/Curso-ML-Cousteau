@@ -1,0 +1,59 @@
+---
+title: "Tutorial"
+output: 
+  learnr::tutorial:
+    fig_caption: no 
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+gradethis::gradethis_setup()
+knitr::opts_chunk$set(echo = FALSE)
+library(readr) # read files
+library(dplyr) # filter
+library(tidyr) #pivot_longer #pivot_wider
+library(ggplot2)
+```
+
+
+## Introducción
+
+Hola, para seguir y entender las siguientes partes del curso, es necesario que
+recordemos cómo realizar tareas "básicas" en R. 
+
+Primero, **crea un proyecto en R**. 
+
+```{r proyecto}
+quiz(
+  question("¿Ya creaste tu proyecto?",
+           answer("No", message = "Busca cómo hacerlo o pide ayuda"),
+           answer("Sí", correct = TRUE),
+           allow_retry = TRUE,
+           correct = "¡Excelente! Ahora pasa a la siguiente parte"
+  )
+)
+```  
+
+## Clases de vectores
+
+¿De qué clase es cada uno de estos vectores?
+
+```{r vector1, echo = TRUE, eval = FALSE}
+c(1, 2, 3, "a")
+```
+
+```{r vector1_quiz}
+quiz(
+  question("",
+           answer("Numérico", message = "No. Piensa porqué"),
+           answer("Caracter", correct = TRUE),
+           answer("Lógico", message = "No. Piensa porqué"),
+           allow_retry = TRUE,
+           correct = "¡Excelente! Ahora pasa al siguiente vector"
+  )
+)
+```  
