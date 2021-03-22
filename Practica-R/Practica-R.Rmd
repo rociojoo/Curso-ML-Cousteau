@@ -14,7 +14,10 @@ runtime: shiny_prerendered
 library(learnr)
 gradethis::gradethis_setup()
 knitr::opts_chunk$set(echo = FALSE)
-library(readr)
+library(readr) # read files
+library(dplyr) # filter
+library(tidyr) #pivot_longer #pivot_wider
+library(ggplot2)
 ```
 
 
@@ -125,9 +128,143 @@ y calcular el valor de correlación de Spearman.
 
 
 
-```{r na-corr, exercise=TRUE}
-(datos <- read_delim("https://raw.githubusercontent.com/rociojoo/Curso-ML-Cousteau/main/datos/temp_hum.txt", delim = ";", col_names = TRUE) )
+```{r na-corr, exercise=TRUE, warning=FALSE, exercise.lines = 7}
+
+```
+
+```{r na-corr-hint, warning = FALSE, echo = FALSE, eval = TRUE}
+help("cor")
+```
+
+```{r corr, warning = FALSE, echo = FALSE, eval = TRUE}
+datos <- read_delim(
+                 "https://raw.githubusercontent.com/rociojoo/Curso-ML-Cousteau/main/datos/temp_hum.txt", 
+                 delim = ";", col_names = TRUE, col_types = "nn") 
+               
+corr_right <- cor(x = datos[,1], y = datos[,2], # variables
+         method = "spearman", # tipo de correlación
+         use = "pairwise.complete.obs") 
+
 ```
 
 
+```{r na-corr-check, warning=FALSE}
+grade_result(
+  pass_if(
+    ~identical(round(.result), round(corr_right)),
+    message = "¡Muy bien! Pasa a la siguiente sección."
+  )
+)
+
+```
+
+
+## Fechas
+
+Carga los datos de https://ndownloader.figshare.com/files/2292169, 
+y crea un vector de fecha de clase `POSIXct` en formato YYYY-MM-DD,
+en huso horario UTC.
+Produce como resultado final la fecha mínima.
+
+
+```{r fechas-1, exercise=TRUE, warning=FALSE, exercise.lines = 5, message=FALSE}
+
+```
+
+```{r fechas-1-hint, warning = FALSE, echo = FALSE, eval = TRUE}
+help("as.POSIXct")
+help("strptime")
+```
+
+```{r fechas-1-sol, warning = FALSE, echo = FALSE, eval = TRUE, message=FALSE}
+surveys <- read_csv("https://ndownloader.figshare.com/files/2292169")
+surveys$fecha_chr <- paste(surveys$year, surveys$month, surveys$day, sep = "-")
+surveys$fecha <- as.POSIXct(strptime(surveys$fecha_chr, "%Y-%m-%d"), tz = "GMT") 
+```
+
+```{r fechas-1-check, warning=FALSE}
+grade_result(
+  pass_if(
+    ~identical(.result, min(surveys$fecha, na.rm = TRUE)),
+    message = "¡Muy bien! Ahora pasa al siguiente ejercicio"
+  )
+)
+
+```
+
+Usa los datos `lakers` del paquete `lubridate`. 
+Produce un vector de fecha-hora `POSIXct` en huso horario "America/Los_Angeles". 
+Muestra como resultado la fecha y hora, en hora de Lima (Perú),
+de la última jugada registrada
+del último partido de los Lakers contra los Orlando Magic (ORL) en casa. 
+
+```{r fechas-2, exercise=TRUE, warning=FALSE, exercise.lines = 15, message=FALSE}
+
+```
+
+```{r fechas-2-hint, warning = FALSE, echo = FALSE, eval = TRUE}
+?lubridate::with_tz
+```
+
+
+```{r lakers, warning = FALSE, echo = FALSE, eval = TRUE, message=FALSE}
+library(lubridate)
+data(lakers)
+lakers$Fecha <- as.POSIXct(strptime(paste(lakers$date, lakers$time, sep = " "), 
+                                    format = "%Y%m%d %H:%M"), 
+                           tz = "America/Los_Angeles")
+fecha_hora <- 
+lakers %>% 
+  filter(opponent == "ORL") %>% 
+  filter(game_type == "home") %>% 
+  filter(Fecha == max(Fecha)) %>% 
+  select(Fecha) %>% 
+  with_tz(tzone = "America/Lima")
+```
+
+```{r fechas-2-check, warning=FALSE}
+grade_result(
+  pass_if(
+    ~identical(.result, fecha_hora),
+    message = "¡Muy bien!"
+  )
+)
+
+```
+
+Avísame cuando termines esta parte.
+
+## Gráficos con ggplot
+
+¡Felicitaciones por haber llegado hasta aquí!
+
+El último ejercicio es para crear un gráfico:
+
+Con los datos `penguins` del paquete `palmerpenguins`, crea un gráfico mostrando
+la relación entre la longitud de las aletas y la masa corporal, diferenciando 
+entre especies. 
+¡Hazlo lo mejor que puedas!
+
+Guárdalo en un archivo .png o .jpeg y lo colgarás en el folder indicado.
+
+
+
+```{r, message=FALSE, warning=FALSE, eval = FALSE}
+library(palmerpenguins)
+ggplot(data = penguins, 
+       aes (x = flipper_length_mm,
+            y = body_mass_g)) +
+  geom_point(aes(color = species,
+                 shape = species),
+             size = 3,
+             alpha = 1) +
+  scale_color_brewer(palette = "Dark2") +
+  labs(title = "Asociación entre longitud de aletas y masa corporal de pingüinos Adelie, Chinstrap y Gentoo",
+       x = "Longitud de aleta (mm)",
+       y = "Masa corporal (g)",
+       color = "Especie",
+       shape = "Especie") +
+  theme_minimal()
+ggsave(filename = "./img/ggplot_eg.png")
+```
 
