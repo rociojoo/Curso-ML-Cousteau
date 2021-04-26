@@ -5,8 +5,8 @@ account: rocioj
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3830293
-bundleId: 4378135
+bundleId: 4519058
 url: https://rocioj.shinyapps.io/Practica-R/
-when: 1616386428.97457
+when: 1619417739.73009
 asMultiple: FALSE
 asStatic: FALSE

@@ -105,9 +105,7 @@ La duración de cada sub-módulo dependerá del avance del grupo
 
 * Explicaciones de mi parte
 
-* Trabajos personales
-
-* Trabajos en grupos (aleatorios o pre-definidos)
+* Trabajos personales o en grupos
 
 * Formularios y documentos a llenar
 
@@ -119,12 +117,6 @@ La duración de cada sub-módulo dependerá del avance del grupo
 
 * Reglas para las pausas: no dispositivos electrónicos
 
-
----
-
-# Encuesta previa
-
-Resultados sobre lo que contestaron. 
 
 ---
 
