@@ -1,0 +1,35 @@
+tidymodels resources
+
+https://github.com/Saryace/tallertidymodels
+
+https://raw.githack.com/Saryace/tallertidymodels/master/tallertidymodels.html#6
+
+https://www.tmwr.org/
+
+https://mybinder.org/v2/gh/rlbarter/tidymodels_talk/HEAD?filepath=tidymodels_talk.ipynb
+
+https://www.youtube.com/watch?v=o38PVdS3k_Q&t=1069s #Rladies ARG
+
+https://www.youtube.com/watch?v=dbXDkEEuvCU&t=860s # Julia Silge
+
+tidymodels with palmerpenguins
+
+https://sntag.github.io/post/2020-08-04-tidymodels-and-palmers-penguins/
+https://juliasilge.com/blog/palmer-penguins/
+https://koderkow.rbind.io/post/tidymodels-rpart-and-pengnuins/
+https://usemodels.tidymodels.org/
+https://github.com/tidymodels/usemodels
+
+https://towardsdatascience.com/dials-tune-and-parsnip-tidymodels-way-to-create-and-tune-model-parameters-c97ba31d6173
+
+
+
+random forest https://www.linkedin.com/pulse/different-random-forest-packages-r-madhur-modi
+
+https://www.youtube.com/watch?v=ts5bRZ7pRKQ # Julia Silge with tunning 45:37
+
+http://www.rebeccabarter.com/blog/2020-03-25_machine_learning/#tune-the-parameters
+https://juliasilge.com/blog/last-airbender/
+https://recipes.tidymodels.org/reference/step_profile.html
+https://christophm.github.io/interpretable-ml-book/pdp.html
+https://community.rstudio.com/t/how-to-use-pdp-partial-in-tidymodels/69735

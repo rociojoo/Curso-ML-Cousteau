@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Tidymodels y machine learning en R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Rocío Joo" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/chocolate-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Tidymodels y machine learning en R
+### Rocío Joo
+### Abril 2021
+
+---
+
+
+
+
+
+
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # Objetivos de este módulo --&gt;
+
+&lt;!-- **3.** Interpretar el modelo --&gt;
+
+&lt;!--   * Mismo ejercicio y modelo que en *2.* --&gt;
+&lt;!--   * Importancia de las variables --&gt;
+&lt;!--   * Dependencia parcial --&gt;
+
+&lt;!-- --- --&gt;
+
+# ¿Qué es tidymodels?
+
+--
+
+Metapaquete para modelar de manera ordenada. 
+
+--
+
+tidy data --&gt; datos ordenados
+
+&lt;img src="./img/tidydata_5.jpg" width="80%" style="display: block; margin: auto;" /&gt;
+
+Artwork by @allison_horst
+
+---
+
+# ¿Qué es tidymodels?
+
+&lt;img src="./img/flujo-ciencia-datos-ml.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+Imagen de https://github.com/data-datum/curso-r-analisis-datos
+
+---
+
+# ¿Por qué tidymodels?
+
+Las funciones de aprendizaje automático en R varían respecto al formato de los
+datos de entrada, dependiendo del paquete a utilizar.
+
+Ejm:
+
+
+```r
+  randomForest::randomForest(x = x, y = y, data = data)
+```
+
+
+```r
+  ranger::ranger(y ~ x, data = data)
+```
+
+---
+
+# ¿Por qué tidymodels?
+
+
+.pull-left[
+
+**Flujo de trabajo** consistente para:
+
+* Dividir en sets de **entrenamiento** y **test**
+
+* Definir una "receta" para el **pre-procesamiento** de datos
+
+* Especificar el **modelo**
+
+* **Calibrar** los hiperparámetros
+
+* **Evaluar** y comparar modelos
+
+* Generar **predicciones** con el modelo final
+
+* Calcular la **importancia** de las variables en el modelo
+
+]
+
+
+.pull-right[
+
+&lt;img src="./img/workflows.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# ¿Por qué tidymodels?
+
+
+.pull-left[
+
+**Flujo de trabajo** consistente para:
+
+* Dividir en sets de **entrenamiento** y **test**
+
+* Definir una "receta" para el **pre-procesamiento** de datos
+
+* Especificar el **modelo**
+
+* **Calibrar** los hiperparámetros
+
+* **Evaluar** y comparar modelos
+
+* Generar **predicciones** con el modelo final
+
+* Calcular la **importancia** de las variables en el modelo
+
+]
+
+
+.pull-right[
+
+&lt;img src="./img/rsample.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# ¿Por qué tidymodels?
+
+
+.pull-left[
+
+**Flujo de trabajo** consistente para:
+
+* Dividir en sets de **entrenamiento** y **test**
+
+* Definir una "receta" para el **pre-procesamiento** de datos
+
+* Especificar el **modelo**
+
+* **Calibrar** los hiperparámetros
+
+* **Evaluar** y comparar modelos
+
+* Generar **predicciones** con el modelo final
+
+* Calcular la **importancia** de las variables en el modelo
+
+]
+
+
+.pull-right[
+
+&lt;img src="./img/recipes.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# ¿Por qué tidymodels?
+
+
+.pull-left[
+
+**Flujo de trabajo** consistente para:
+
+* Dividir en sets de **entrenamiento** y **test**
+
+* Definir una "receta" para el **pre-procesamiento** de datos
+
+* Especificar el **modelo**
+
+* **Calibrar** los hiperparámetros
+
+* **Evaluar** y comparar modelos
+
+* Generar **predicciones** con el modelo final
+
+* Calcular la **importancia** de las variables en el modelo
+
+]
+
+
+.pull-right[
+
+&lt;img src="./img/parsnip.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# ¿Por qué tidymodels?
+
+
+.pull-left[
+
+**Flujo de trabajo** consistente para:
+
+* Dividir en sets de **entrenamiento** y **test**
+
+* Definir una "receta" para el **pre-procesamiento** de datos
+
+* Especificar el **modelo**
+
+* **Calibrar** los hiperparámetros
+
+* **Evaluar** y comparar modelos
+
+* Generar **predicciones** con el modelo final
+
+* Calcular la **importancia** de las variables en el modelo
+
+]
+
+
+.pull-right[
+
+&lt;img src="./img/tune.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# ¿Por qué tidymodels?
+
+
+.pull-left[
+
+**Flujo de trabajo** consistente para:
+
+* Dividir en sets de **entrenamiento** y **test**
+
+* Definir una "receta" para el **pre-procesamiento** de datos
+
+* Especificar el **modelo**
+
+* **Calibrar** los hiperparámetros
+
+* **Evaluar** y comparar modelos
+
+* Generar **predicciones** con el modelo final
+
+* Calcular la **importancia** de las variables en el modelo
+
+]
+
+
+.pull-right[
+
+&lt;img src="./img/dials.jpeg" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+# ¿Por qué tidymodels?
+
+
+.pull-left[
+
+**Flujo de trabajo** consistente para:
+
+* Dividir en sets de **entrenamiento** y **test**
+
+* Definir una "receta" para el **pre-procesamiento** de datos
+
+* Especificar el **modelo**
+
+* **Calibrar** los hiperparámetros
+
+* **Evaluar** y comparar modelos
+
+* Generar **predicciones** con el modelo final
+
+* Calcular la **importancia** de las variables en el modelo
+
+]
+
+
+.pull-right[
+
+&lt;img src="./img/yardstick.jpeg" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+
+# Primer caso:  
+
+# Ajustando un modelo de aprendizaje automático y predecir con `tidymodels`.
+
+--
+
+  * Ejercicio de clasificación
+  * Bosques aleatorios
+  * Entrenamiento y test
+  * Parametrización por defecto
+  * Matriz de confusión
+  * Flujo de trabajo simple
+
+---
+
+# Los datos
+
+Imaginemos que queremos crear un modelo para predecir **especie** de pingüinos en
+la Antártida en base a su morfología u otras variables disponibles.
+
+
+
+```r
+library(datos)
+pinguinos
+```
+
+```
+## # A tibble: 344 x 8
+##    especie isla  largo_pico_mm alto_pico_mm largo_aleta_mm masa_corporal_g sexo 
+##    &lt;fct&gt;   &lt;fct&gt;         &lt;dbl&gt;        &lt;dbl&gt;          &lt;int&gt;           &lt;int&gt; &lt;fct&gt;
+##  1 Adelia  Torg…          39.1         18.7            181            3750 macho
+##  2 Adelia  Torg…          39.5         17.4            186            3800 hemb…
+##  3 Adelia  Torg…          40.3         18              195            3250 hemb…
+##  4 Adelia  Torg…          NA           NA               NA              NA &lt;NA&gt; 
+##  5 Adelia  Torg…          36.7         19.3            193            3450 hemb…
+##  6 Adelia  Torg…          39.3         20.6            190            3650 macho
+##  7 Adelia  Torg…          38.9         17.8            181            3625 hemb…
+##  8 Adelia  Torg…          39.2         19.6            195            4675 macho
+##  9 Adelia  Torg…          34.1         18.1            193            3475 &lt;NA&gt; 
+## 10 Adelia  Torg…          42           20.2            190            4250 &lt;NA&gt; 
+## # … with 334 more rows, and 1 more variable: anio &lt;int&gt;
+```
+
+---
+
+# Explorando los datos
+
+
+
+```r
+summary(pinguinos)
+```
+
+```
+##     especie           isla     largo_pico_mm    alto_pico_mm   largo_aleta_mm 
+##  Adelia :152   Biscoe   :168   Min.   :32.10   Min.   :13.10   Min.   :172.0  
+##  Barbijo: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60   1st Qu.:190.0  
+##  Papúa  :124   Torgersen: 52   Median :44.45   Median :17.30   Median :197.0  
+##                                Mean   :43.92   Mean   :17.15   Mean   :200.9  
+##                                3rd Qu.:48.50   3rd Qu.:18.70   3rd Qu.:213.0  
+##                                Max.   :59.60   Max.   :21.50   Max.   :231.0  
+##                                NA's   :2       NA's   :2       NA's   :2      
+##  masa_corporal_g     sexo          anio     
+##  Min.   :2700    hembra:165   Min.   :2007  
+##  1st Qu.:3550    macho :168   1st Qu.:2007  
+##  Median :4050    NA's  : 11   Median :2008  
+##  Mean   :4202                 Mean   :2008  
+##  3rd Qu.:4750                 3rd Qu.:2009  
+##  Max.   :6300                 Max.   :2009  
+##  NA's   :2
+```
+
+
+---
+
+# Explorando los datos
+
+
+```r
+library(magrittr) #pipes
+library(tidyr) #drop_na
+pinguinos &lt;- pinguinos %&gt;% 
+  drop_na()
+
+summary(pinguinos)
+```
+
+```
+##     especie           isla     largo_pico_mm    alto_pico_mm   largo_aleta_mm
+##  Adelia :146   Biscoe   :163   Min.   :32.10   Min.   :13.10   Min.   :172   
+##  Barbijo: 68   Dream    :123   1st Qu.:39.50   1st Qu.:15.60   1st Qu.:190   
+##  Papúa  :119   Torgersen: 47   Median :44.50   Median :17.30   Median :197   
+##                                Mean   :43.99   Mean   :17.16   Mean   :201   
+##                                3rd Qu.:48.60   3rd Qu.:18.70   3rd Qu.:213   
+##                                Max.   :59.60   Max.   :21.50   Max.   :231   
+##  masa_corporal_g     sexo          anio     
+##  Min.   :2700    hembra:165   Min.   :2007  
+##  1st Qu.:3550    macho :168   1st Qu.:2007  
+##  Median :4050                 Median :2008  
+##  Mean   :4207                 Mean   :2008  
+##  3rd Qu.:4775                 3rd Qu.:2009  
+##  Max.   :6300                 Max.   :2009
+```
+
+ 
+---
+
+# Explorando los datos
+
+
+
+```r
+library(ggplot2)
+pinguinos %&gt;% 
+  ggplot(aes(x = largo_pico_mm, y = largo_aleta_mm, color = especie)) +
+  geom_point() +
+  theme_classic()
+```
+
+![](tidymodels_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+---
+
+# Explorando los datos
+
+
+
+```r
+library(dplyr)
+pinguinos %&gt;% 
+  select(-especie, -isla, -sexo, -anio) %&gt;% 
+  cor(use = "pairwise.complete.obs") %&gt;% 
+  round(digits = 2)
+```
+
+```
+##                 largo_pico_mm alto_pico_mm largo_aleta_mm masa_corporal_g
+## largo_pico_mm            1.00        -0.23           0.65            0.59
+## alto_pico_mm            -0.23         1.00          -0.58           -0.47
+## largo_aleta_mm           0.65        -0.58           1.00            0.87
+## masa_corporal_g          0.59        -0.47           0.87            1.00
+```
+---
+
+# Explorando los datos
+
+
+
+```r
+library(GGally)
+ggpairs(pinguinos)
+```
+
+![](tidymodels_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+
+
+---
+
+# Dividiendo entre datos de entrenamiento y test
+
+Usamos el paquete `rsample`
+
+
+```r
+library(rsample)
+
+set.seed(4563) # for traceability
+pinguinos_div &lt;- initial_split(data = pinguinos, prop = 0.75)
+pinguinos_div
+```
+
+```
+## &lt;Analysis/Assess/Total&gt;
+## &lt;250/83/333&gt;
+```
+
+
+
+```r
+pinguinos_entren &lt;- training(pinguinos_div)
+pinguinos_test &lt;- testing(pinguinos_div)
+```
+
+---
+
+# Especificando el modelo
+
+En general, hay que especificar: 
+
+* El tipo de modelo
+* El modo (clasificación o regresión)
+* El motor ("engine") o paquete
+
+
+El [motor de búsqueda de tidymodels](https://www.tidymodels.org/find/parsnip/) 
+ofrece muchas opciones. 
+
+Digamos que usaremos bosques aleatorios.
+
+--
+
+* El tipo de modelo es `rand_forest`
+
+* El modo es `classification`
+
+* El motor que usaremos es `ranger`
+
+---
+
+# Especificando el modelo
+
+
+```r
+library(parsnip)
+rf_espec &lt;- 
+  # tipo de modelo
+  rand_forest() %&gt;% 
+  # modo
+  set_mode("classification") %&gt;% 
+  # motor
+  set_engine("ranger")
+
+rf_espec
+```
+
+```
+## Random Forest Model Specification (classification)
+## 
+## Computational engine: ranger
+```
+
+---
+
+# Creando una receta de pre-procesamiento
+
+&lt;img src="./img/recipes_AH.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+Artwork by @allison_horst
+
+---
+
+# Creando una receta de pre-procesamiento
+
+
+```r
+library(recipes)
+receta &lt;- recipe(especie ~ ., # modelar especie usando todas las otras variables
+                 data = pinguinos) %&gt;% 
+  # cambié de opinión respecto a anio 
+  update_role(anio, new_role = "no usar") %&gt;% 
+  # remover variables con correlaciones &gt; 0.8
+  step_corr(all_predictors() &amp; all_numeric(), threshold = 0.8) 
+
+summary(receta)
+```
+
+```
+## # A tibble: 8 x 4
+##   variable        type    role      source  
+##   &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   
+## 1 isla            nominal predictor original
+## 2 largo_pico_mm   numeric predictor original
+## 3 alto_pico_mm    numeric predictor original
+## 4 largo_aleta_mm  numeric predictor original
+## 5 masa_corporal_g numeric predictor original
+## 6 sexo            nominal predictor original
+## 7 anio            numeric no usar   original
+## 8 especie         nominal outcome   original
+```
+
+
+---
+
+# Armando el flujo de trabajo
+
+
+```r
+library(workflows)
+# generando el flujo de trabajo con workflow
+rf_flujo &lt;- workflow() %&gt;% 
+  # añadir la receta
+  add_recipe(receta) %&gt;% 
+  # añadir las especificaciones del modelo
+  add_model(rf_espec)
+```
+
+---
+
+# Armando el flujo de trabajo
+
+
+```r
+rf_flujo 
+```
+
+```
+## ══ Workflow ════════════════════════════════════════════════════════════════════
+## Preprocessor: Recipe
+## Model: rand_forest()
+## 
+## ── Preprocessor ────────────────────────────────────────────────────────────────
+## 1 Recipe Step
+## 
+## ● step_corr()
+## 
+## ── Model ───────────────────────────────────────────────────────────────────────
+## Random Forest Model Specification (classification)
+## 
+## Computational engine: ranger
+```
+
+---
+
+# Aplicando la receta y ajustando el modelo a los datos 
+
+
+```r
+library(tune)
+rf_ajuste &lt;- fit(object = rf_flujo, 
+                 data = pinguinos_entren)
+```
+
+---
+
+&lt;!-- # Aplicando la receta y ajustando el modelo a los datos  --&gt;
+
+
+```
+## ══ Workflow [trained] ══════════════════════════════════════════════════════════
+## Preprocessor: Recipe
+## Model: rand_forest()
+## 
+## ── Preprocessor ────────────────────────────────────────────────────────────────
+## 1 Recipe Step
+## 
+## ● step_corr()
+## 
+## ── Model ───────────────────────────────────────────────────────────────────────
+## Ranger result
+## 
+## Call:
+##  ranger::ranger(x = maybe_data_frame(x), y = y, num.threads = 1,      verbose = FALSE, seed = sample.int(10^5, 1), probability = TRUE) 
+## 
+## Type:                             Probability estimation 
+## Number of trees:                  500 
+## Sample size:                      250 
+## Number of independent variables:  5 
+## Mtry:                             2 
+## Target node size:                 10 
+## Variable importance mode:         none 
+## Splitrule:                        gini 
+## OOB prediction error (Brier s.):  0.01904099
+```
+
+---
+
+# Prediciendo sobre los datos de test
+
+
+```r
+predict(object = rf_ajuste, 
+        new_data = pinguinos_test)
+```
+
+```
+## # A tibble: 83 x 1
+##    .pred_class
+##    &lt;fct&gt;      
+##  1 Adelia     
+##  2 Adelia     
+##  3 Adelia     
+##  4 Adelia     
+##  5 Adelia     
+##  6 Adelia     
+##  7 Adelia     
+##  8 Adelia     
+##  9 Adelia     
+## 10 Adelia     
+## # … with 73 more rows
+```
+
+---
+
+# Prediciendo sobre los datos de test
+
+
+```r
+(predict(object = rf_ajuste, 
+        new_data = pinguinos_test) %&gt;% 
+  transmute(pred = .pred_class,
+            real = pinguinos_test$especie) -&gt; pinguinos_test_pred)
+```
+
+```
+## # A tibble: 83 x 2
+##    pred   real  
+##    &lt;fct&gt;  &lt;fct&gt; 
+##  1 Adelia Adelia
+##  2 Adelia Adelia
+##  3 Adelia Adelia
+##  4 Adelia Adelia
+##  5 Adelia Adelia
+##  6 Adelia Adelia
+##  7 Adelia Adelia
+##  8 Adelia Adelia
+##  9 Adelia Adelia
+## 10 Adelia Adelia
+## # … with 73 more rows
+```
+
+---
+
+# Calculando la matriz de confusión
+
+
+```r
+library(yardstick)
+pinguinos_test_pred %&gt;% 
+  conf_mat(truth = real, estimate = pred,
+           dnn = c("Predicción", "Real"))
+```
+
+```
+##           Real
+## Predicción Adelia Barbijo Papúa
+##    Adelia      43       0     0
+##    Barbijo      0      17     0
+##    Papúa        0       0    23
+```
+Resultado perfecto.
+
+
+---
+
+
+# Segundo caso:  
+
+# Calibrando los hiperparámetros del modelo.
+
+--
+
+  * Ejercicio de clasificación
+  * Bosques aleatorios
+  * Remuestreo en el set de entrenamiento
+  * Calibración de hiperparámetros
+  * Matriz de confusión e indicadores
+
+---
+
+Ahora buscaremos predecir el sexo de los pingüinos a partir morfológicos y otros.
+
+--
+
+# Cambiando la receta
+
+
+```r
+receta2 &lt;- recipe(sexo ~ .,
+                  data = pinguinos) %&gt;% 
+  update_role(anio, new_role = "no usar") %&gt;% 
+  update_role(isla, new_role = "no usar") %&gt;% 
+  step_corr(all_predictors() &amp; all_numeric(), threshold = 0.8)
+```
+
+---
+
+# Especificando el modelo
+
+Esta vez, especificando los hiperparámetros a calibrar para el tipo de modelo. 
+
+Los hiperparámetros a especificar se pueden ver con 
+
+
+```r
+show_model_info("rand_forest")
+```
+
+```
+## Information for `rand_forest`
+##  modes: unknown, classification, regression 
+## 
+##  engines: 
+##    classification: randomForest, ranger, spark
+##    regression:     randomForest, ranger, spark
+## 
+##  arguments: 
+##    ranger:       
+##       mtry  --&gt; mtry
+##       trees --&gt; num.trees
+##       min_n --&gt; min.node.size
+##    randomForest: 
+##       mtry  --&gt; mtry
+##       trees --&gt; ntree
+##       min_n --&gt; nodesize
+##    spark:        
+##       mtry  --&gt; feature_subset_strategy
+##       trees --&gt; num_trees
+##       min_n --&gt; min_instances_per_node
+## 
+##  fit modules:
+##          engine           mode
+##          ranger classification
+##          ranger     regression
+##    randomForest classification
+##    randomForest     regression
+##           spark classification
+##           spark     regression
+## 
+##  prediction modules:
+##              mode       engine                    methods
+##    classification randomForest           class, prob, raw
+##    classification       ranger class, conf_int, prob, raw
+##    classification        spark                class, prob
+##        regression randomForest               numeric, raw
+##        regression       ranger     conf_int, numeric, raw
+##        regression        spark                    numeric
+```
+
+---
+
+# Especificando el modelo
+
+
+```r
+rf_espec2 &lt;- rand_forest(
+  mtry = tune(), # número de predictores a usar en cada división
+  min_n = tune() # número de observaciones necesarias para seguir dividiendo en nodos
+) %&gt;% 
+  set_mode("classification") %&gt;% 
+  set_engine("ranger")
+```
+
+---
+
+# Entrenamiento y test
+
+Usamos las particiones anteriores `pinguinos_entren` y `pinguinos_test` a partir
+de `pinguinos_div`.
+
+--
+
+
+```r
+pinguinos_div
+```
+
+```
+## &lt;Analysis/Assess/Total&gt;
+## &lt;250/83/333&gt;
+```
+
+--
+
+Esta vez, ajustaremos los modelos con parametrizaciones distintas a varias 
+muestras generadas a partir de los datos de entrenamiento. 
+
+
+---
+
+# Entrenamiento y test
+
+
+```r
+set.seed(8723)
+pinguinos_boot &lt;- bootstraps(pinguinos_entren, strata = sexo)
+pinguinos_boot
+```
+
+```
+## # Bootstrap sampling using stratification 
+## # A tibble: 25 x 2
+##    splits           id         
+##    &lt;list&gt;           &lt;chr&gt;      
+##  1 &lt;split [250/89]&gt; Bootstrap01
+##  2 &lt;split [250/86]&gt; Bootstrap02
+##  3 &lt;split [250/89]&gt; Bootstrap03
+##  4 &lt;split [250/96]&gt; Bootstrap04
+##  5 &lt;split [250/92]&gt; Bootstrap05
+##  6 &lt;split [250/88]&gt; Bootstrap06
+##  7 &lt;split [250/93]&gt; Bootstrap07
+##  8 &lt;split [250/91]&gt; Bootstrap08
+##  9 &lt;split [250/89]&gt; Bootstrap09
+## 10 &lt;split [250/85]&gt; Bootstrap10
+## # … with 15 more rows
+```
+
+---
+
+# Armando el flujo de trabajo
+
+
+```r
+rf_flujo2 &lt;- workflow() %&gt;% 
+  add_recipe(receta2) %&gt;% 
+  add_model(rf_espec2)
+```
+
+---
+
+# Armando el flujo de trabajo
+
+
+```r
+rf_flujo2
+```
+
+```
+## ══ Workflow ════════════════════════════════════════════════════════════════════
+## Preprocessor: Recipe
+## Model: rand_forest()
+## 
+## ── Preprocessor ────────────────────────────────────────────────────────────────
+## 1 Recipe Step
+## 
+## ● step_corr()
+## 
+## ── Model ───────────────────────────────────────────────────────────────────────
+## Random Forest Model Specification (classification)
+## 
+## Main Arguments:
+##   mtry = tune()
+##   min_n = tune()
+## 
+## Computational engine: ranger
+```
+
+---
+
+# Calibrando hiperparámetros
+
+  * Haremos cálculo en paralelo para optimizar procesos (opcional).
+  
+  * Si no tenemos idea de los valores a probar, fijamos un número de valores y 
+  el algoritmo internamente los fija
+
+
+```r
+library(parallel)
+all_cores &lt;- parallel::detectCores(logical = FALSE) # paralelo
+cl &lt;- makePSOCKcluster(all_cores-3)  # paralelo
+doParallel::registerDoParallel(cl) # paralelo
+
+set.seed(345)
+calibrar_res &lt;- tune_grid(
+  rf_flujo2,
+  resamples = pinguinos_boot,
+  grid = 10
+)
+
+stopCluster(cl) # paralelo
+```
+
+---
+
+# Calibrando hiperparámetros
+
+Veamos los valores probados y sus resultados respecto a la exactitud (*accuracy*)
+
+
+```r
+calibrar_res %&gt;% 
+  collect_metrics() 
+```
+
+```
+## # A tibble: 20 x 8
+##     mtry min_n .metric  .estimator  mean     n std_err .config              
+##    &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;                
+##  1     2    30 accuracy binary     0.878    25 0.00667 Preprocessor1_Model01
+##  2     2    30 roc_auc  binary     0.956    25 0.00358 Preprocessor1_Model01
+##  3     3    12 accuracy binary     0.883    25 0.00725 Preprocessor1_Model02
+##  4     3    12 roc_auc  binary     0.955    25 0.00351 Preprocessor1_Model02
+##  5     2    27 accuracy binary     0.880    25 0.00655 Preprocessor1_Model03
+##  6     2    27 roc_auc  binary     0.957    25 0.00354 Preprocessor1_Model03
+##  7     3    24 accuracy binary     0.874    25 0.00688 Preprocessor1_Model04
+##  8     3    24 roc_auc  binary     0.953    25 0.00372 Preprocessor1_Model04
+##  9     3    39 accuracy binary     0.870    25 0.00680 Preprocessor1_Model05
+## 10     3    39 roc_auc  binary     0.951    25 0.00377 Preprocessor1_Model05
+## 11     2     6 accuracy binary     0.890    25 0.00590 Preprocessor1_Model06
+## 12     2     6 roc_auc  binary     0.960    25 0.00308 Preprocessor1_Model06
+## 13     3    16 accuracy binary     0.881    25 0.00723 Preprocessor1_Model07
+## 14     3    16 roc_auc  binary     0.954    25 0.00357 Preprocessor1_Model07
+## 15     4    17 accuracy binary     0.870    25 0.00764 Preprocessor1_Model08
+## 16     4    17 roc_auc  binary     0.948    25 0.00460 Preprocessor1_Model08
+## 17     2     7 accuracy binary     0.895    25 0.00632 Preprocessor1_Model09
+## 18     2     7 roc_auc  binary     0.960    25 0.00330 Preprocessor1_Model09
+## 19     1    36 accuracy binary     0.894    25 0.00677 Preprocessor1_Model10
+## 20     1    36 roc_auc  binary     0.962    25 0.00346 Preprocessor1_Model10
+```
+
+---
+
+# Calibrando hiperparámetros
+
+Veamos los valores probados y sus resultados respecto a la exactitud (*accuracy*)
+
+
+```r
+calibrar_res %&gt;% 
+  collect_metrics() %&gt;% 
+  filter(.metric == "accuracy") 
+```
+
+```
+## # A tibble: 10 x 8
+##     mtry min_n .metric  .estimator  mean     n std_err .config              
+##    &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;                
+##  1     2    30 accuracy binary     0.878    25 0.00667 Preprocessor1_Model01
+##  2     3    12 accuracy binary     0.883    25 0.00725 Preprocessor1_Model02
+##  3     2    27 accuracy binary     0.880    25 0.00655 Preprocessor1_Model03
+##  4     3    24 accuracy binary     0.874    25 0.00688 Preprocessor1_Model04
+##  5     3    39 accuracy binary     0.870    25 0.00680 Preprocessor1_Model05
+##  6     2     6 accuracy binary     0.890    25 0.00590 Preprocessor1_Model06
+##  7     3    16 accuracy binary     0.881    25 0.00723 Preprocessor1_Model07
+##  8     4    17 accuracy binary     0.870    25 0.00764 Preprocessor1_Model08
+##  9     2     7 accuracy binary     0.895    25 0.00632 Preprocessor1_Model09
+## 10     1    36 accuracy binary     0.894    25 0.00677 Preprocessor1_Model10
+```
+
+---
+
+# Calibrando hiperparámetros
+
+Veamos los valores probados y sus resultados respecto a la exactitud (*accuracy*)
+
+
+```r
+calibrar_res %&gt;% 
+  collect_metrics() %&gt;% 
+  filter(.metric == "accuracy") %&gt;% 
+  select(mtry, min_n, mean)
+```
+
+```
+## # A tibble: 10 x 3
+##     mtry min_n  mean
+##    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+##  1     2    30 0.878
+##  2     3    12 0.883
+##  3     2    27 0.880
+##  4     3    24 0.874
+##  5     3    39 0.870
+##  6     2     6 0.890
+##  7     3    16 0.881
+##  8     4    17 0.870
+##  9     2     7 0.895
+## 10     1    36 0.894
+```
+
+---
+
+# Calibrando hiperparámetros
+
+Veamos los valores probados y sus resultados respecto a la exactitud (*accuracy*)
+
+
+```r
+calibrar_res %&gt;% 
+  collect_metrics() %&gt;% 
+  filter(.metric == "accuracy") %&gt;% 
+  select(mtry, min_n, mean) %&gt;% 
+  pivot_longer(mtry:min_n,
+               values_to = "valor",
+               names_to = "hiperparámetro")
+```
+
+```
+## # A tibble: 20 x 3
+##     mean hiperparámetro valor
+##    &lt;dbl&gt; &lt;chr&gt;          &lt;int&gt;
+##  1 0.878 mtry               2
+##  2 0.878 min_n             30
+##  3 0.883 mtry               3
+##  4 0.883 min_n             12
+##  5 0.880 mtry               2
+##  6 0.880 min_n             27
+##  7 0.874 mtry               3
+##  8 0.874 min_n             24
+##  9 0.870 mtry               3
+## 10 0.870 min_n             39
+## 11 0.890 mtry               2
+## 12 0.890 min_n              6
+## 13 0.881 mtry               3
+## 14 0.881 min_n             16
+## 15 0.870 mtry               4
+## 16 0.870 min_n             17
+## 17 0.895 mtry               2
+## 18 0.895 min_n              7
+## 19 0.894 mtry               1
+## 20 0.894 min_n             36
+```
+
+---
+
+# Calibrando hiperparámetros
+
+Veamos los valores probados y sus resultados respecto a la exactitud (*accuracy*)
+
+
+```r
+calibrar_res %&gt;% 
+  collect_metrics() %&gt;% 
+  filter(.metric == "accuracy") %&gt;% 
+  select(mtry, min_n, mean) %&gt;% 
+  pivot_longer(mtry:min_n,
+               values_to = "valor",
+               names_to = "hiperparametro") %&gt;% 
+  ggplot(aes(x = valor, y = mean)) +
+  geom_point(show.legend = FALSE) + 
+  ylab("exactitud") +
+  facet_wrap(~hiperparametro, scales = "free_x") +
+  theme_light()
+```
+---
+
+# Calibrando hiperparámetros
+
+![](tidymodels_files/figure-html/unnamed-chunk-42-1.png)&lt;!-- --&gt;
+
+
+# Calibrando hiperparámetros
+
+A partir de estos resultados podemos hacer una búsqueda de combinacions de 
+valores más sistemática.
+
+
+```r
+grilla &lt;- expand.grid(
+  mtry = c(1,2),
+  min_n = seq(from = 10, to = 40, by=5)
+)
+
+grilla
+```
+
+```
+##    mtry min_n
+## 1     1    10
+## 2     2    10
+## 3     1    15
+## 4     2    15
+## 5     1    20
+## 6     2    20
+## 7     1    25
+## 8     2    25
+## 9     1    30
+## 10    2    30
+## 11    1    35
+## 12    2    35
+## 13    1    40
+## 14    2    40
+```
+
+---
+
+# Calibrando hiperparámetros
+
+Y calibramos otra vez
+
+
+```r
+cl &lt;- makePSOCKcluster(all_cores-3)  # paralelo
+doParallel::registerDoParallel(cl) # paralelo
+
+set.seed(543)
+calibrar2_res &lt;- tune_grid(
+  rf_flujo2,
+  resamples = pinguinos_boot,
+  grid = grilla
+)
+
+stopCluster(cl) # paralelo
+```
+
+---
+
+# Calibrando hiperparámetros
+
+Veamos los resultados
+
+
+```r
+calibrar2_res %&gt;% 
+  collect_metrics %&gt;% 
+  filter(.metric == "accuracy") 
+```
+
+```
+## # A tibble: 14 x 8
+##     mtry min_n .metric  .estimator  mean     n std_err .config              
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;                
+##  1     1    10 accuracy binary     0.903    25 0.00670 Preprocessor1_Model01
+##  2     2    10 accuracy binary     0.891    25 0.00685 Preprocessor1_Model02
+##  3     1    15 accuracy binary     0.900    25 0.00615 Preprocessor1_Model03
+##  4     2    15 accuracy binary     0.890    25 0.00679 Preprocessor1_Model04
+##  5     1    20 accuracy binary     0.898    25 0.00637 Preprocessor1_Model05
+##  6     2    20 accuracy binary     0.887    25 0.00636 Preprocessor1_Model06
+##  7     1    25 accuracy binary     0.900    25 0.00671 Preprocessor1_Model07
+##  8     2    25 accuracy binary     0.884    25 0.00642 Preprocessor1_Model08
+##  9     1    30 accuracy binary     0.894    25 0.00612 Preprocessor1_Model09
+## 10     2    30 accuracy binary     0.878    25 0.00652 Preprocessor1_Model10
+## 11     1    35 accuracy binary     0.894    25 0.00638 Preprocessor1_Model11
+## 12     2    35 accuracy binary     0.878    25 0.00630 Preprocessor1_Model12
+## 13     1    40 accuracy binary     0.891    25 0.00654 Preprocessor1_Model13
+## 14     2    40 accuracy binary     0.874    25 0.00706 Preprocessor1_Model14
+```
+
+---
+
+# Calibrando hiperparámetros
+
+Veamos los resultados
+
+
+```r
+calibrar2_res %&gt;% 
+  collect_metrics %&gt;% 
+  filter(.metric == "accuracy") %&gt;% 
+  select(mtry, min_n, mean, std_err)
+```
+
+```
+## # A tibble: 14 x 4
+##     mtry min_n  mean std_err
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+##  1     1    10 0.903 0.00670
+##  2     2    10 0.891 0.00685
+##  3     1    15 0.900 0.00615
+##  4     2    15 0.890 0.00679
+##  5     1    20 0.898 0.00637
+##  6     2    20 0.887 0.00636
+##  7     1    25 0.900 0.00671
+##  8     2    25 0.884 0.00642
+##  9     1    30 0.894 0.00612
+## 10     2    30 0.878 0.00652
+## 11     1    35 0.894 0.00638
+## 12     2    35 0.878 0.00630
+## 13     1    40 0.891 0.00654
+## 14     2    40 0.874 0.00706
+```
+
+---
+
+# Calibrando hiperparámetros
+
+Veamos los resultados
+
+
+```r
+calibrar2_res %&gt;% 
+  collect_metrics %&gt;% 
+  filter(.metric == "accuracy") %&gt;% 
+  select(mtry, min_n, mean, std_err) %&gt;% 
+  mutate(min_n = factor(min_n)) %&gt;% 
+  ggplot(aes(x = mtry, y = mean, color = min_n)) +
+  geom_line() +
+  geom_point() +
+  ylab("exactitud") +
+  scale_color_brewer(type = "qual", palette = "Set1" ) +
+  theme_bw()
+```
+
+---
+
+# Calibrando hiperparámetros
+
+Veamos los resultados
+
+.pull-left[
+![](tidymodels_files/figure-html/unnamed-chunk-48-1.png)&lt;!-- --&gt;
+]
+
+--
+
+.pull-right[
+Es obvio que mtry=1 da mejores resultados. No hay mucha diferencia en min_n;
+nos quedamos con min_n=20.
+]
+
+---
+
+# Actualizando las especificaciones del modelo
+
+Lo podemos hacer directamente en nuestro flujo de trabajo
+
+
+```r
+rf_flujo2_cal &lt;- finalize_workflow(
+  x = rf_flujo2,
+  parameters = list(mtry = 1, min_n = 20) # select_best(calibrar_res, "accuracy")
+)
+
+rf_flujo2_cal
+```
+---
+
+# Actualizando las especificaciones del modelo
+
+
+```
+## ══ Workflow ════════════════════════════════════════════════════════════════════
+## Preprocessor: Recipe
+## Model: rand_forest()
+## 
+## ── Preprocessor ────────────────────────────────────────────────────────────────
+## 1 Recipe Step
+## 
+## ● step_corr()
+## 
+## ── Model ───────────────────────────────────────────────────────────────────────
+## Random Forest Model Specification (classification)
+## 
+## Main Arguments:
+##   mtry = 1
+##   min_n = 20
+## 
+## Computational engine: ranger
+```
+
+---
+
+# Ajustando a los datos y prediciendo
+
+
+```r
+rf_ajuste2_cal &lt;- rf_flujo2_cal %&gt;% 
+  fit(data = pinguinos_entren)
+
+predict(object = rf_ajuste2_cal, new_data =  pinguinos_test) %&gt;% 
+  transmute(pred = .pred_class,
+            real = pinguinos_test$sexo) -&gt; pinguinos_sex_pred
+```
+
+---
+
+# Calculando la matriz de confusión e indicadores
+
+
+```r
+pinguinos_sex_pred %&gt;% 
+conf_mat(truth = real, estimate = pred, 
+         dnn = c("Predicción", "Real"))
+```
+
+```
+##           Real
+## Predicción hembra macho
+##     hembra     33     4
+##     macho       3    43
+```
+
+--
+
+
+```r
+multi_metric &lt;- metric_set(accuracy, recall, precision)
+multi_metric(data = pinguinos_sex_pred, truth = real, estimate = pred)
+```
+
+```
+## # A tibble: 3 x 3
+##   .metric   .estimator .estimate
+##   &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;
+## 1 accuracy  binary         0.916
+## 2 recall    binary         0.917
+## 3 precision binary         0.892
+```
+
+---
+
+# Tercer caso:
+
+# Interpretando el modelo
+
+  * Ejercicio de clasificación
+  * Bosques aleatorios
+  * Hiperparametrización anterior
+  * Importancia de variables
+  * Dependencia parcial
+
+---
+
+# Especificando el modelo
+
+Cuando nos interesa la interpretación, es mejor pedir el cálculo de 
+la importancia al especificar el modelo. 
+
+Ahora usaremos los valores de hiperparámetros del caso anterior.
+
+--
+
+
+```r
+rf_espec3 &lt;- rand_forest() %&gt;% 
+  set_args(mtry = 1,
+           min_n = 20) %&gt;% 
+  set_mode("classification") %&gt;% 
+  set_engine("ranger", importance = "permutation")
+
+rf_flujo3 &lt;- workflow() %&gt;% 
+  add_recipe(receta2) %&gt;% 
+  add_model(rf_espec3)
+```
+
+Esta vez ajustamos a todos los datos
+
+
+```r
+rf_ajuste3 &lt;- fit(object = rf_flujo3,
+                  data = pinguinos)
+```
+
+Extraemos el modelo
+
+
+```r
+modelo_ajustado &lt;- rf_ajuste3 %&gt;%  
+  pull_workflow_fit()
+
+library(vip)
+```
+
+```
+## 
+## Attaching package: 'vip'
+```
+
+```
+## The following object is masked from 'package:utils':
+## 
+##     vi
+```
+
+```r
+importancia &lt;- vi(modelo_ajustado) 
+
+importancia &lt;- importancia %&gt;%
+  mutate(Variable = factor(Variable, levels = Variable[order(Importance)]))
+
+
+importancia %&gt;% 
+  ggplot(aes(y = Variable, x = Importance)) +
+  geom_point() +
+  theme_bw()
+```
+
+![](tidymodels_files/figure-html/unnamed-chunk-56-1.png)&lt;!-- --&gt;
+
+```r
+library(pdp)
+
+
+# From ?partial:
+# `pred.fun`: Optional prediction function that requires two arguments:
+#             `object` and `newdata`. If specified, then the function must
+#              return a single prediction or a vector of predictions (i.e., not
+#              a matrix or data frame). Default is NULL.
+pdp_pred_fun &lt;- function(object, newdata) {
+  predict(object, newdata, type = "class")$.pred_class
+}
+
+             
+partial(rf_ajuste3,
+          pred.var = "largo_pico_mm",
+          pred.fun = pdp_pred_fun,
+          train = pinguinos, center = FALSE) %&gt;% 
+plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
+```
+
+![](tidymodels_files/figure-html/unnamed-chunk-56-2.png)&lt;!-- --&gt;
+
+```r
+partial(rf_ajuste3,
+          pred.var = "alto_pico_mm",
+          pred.fun = pdp_pred_fun,
+          train = pinguinos, center = FALSE) %&gt;% 
+plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
+```
+
+![](tidymodels_files/figure-html/unnamed-chunk-56-3.png)&lt;!-- --&gt;
+
+```r
+partial(rf_ajuste3,
+          pred.var = "masa_corporal_g",
+          pred.fun = pdp_pred_fun,
+          train = pinguinos, center = FALSE) %&gt;% 
+plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
+```
+
+![](tidymodels_files/figure-html/unnamed-chunk-56-4.png)&lt;!-- --&gt;
+
+```r
+partial(rf_ajuste3,
+          pred.var = "especie",
+          pred.fun = pdp_pred_fun,
+          train = pinguinos, center = FALSE) %&gt;% 
+plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
+```
+
+![](tidymodels_files/figure-html/unnamed-chunk-56-5.png)&lt;!-- --&gt;
+
+```r
+partial(rf_ajuste3,
+          pred.var = c("alto_pico_mm","masa_corporal_g"),
+          pred.fun = pdp_pred_fun,
+          train = pinguinos, center = FALSE) %&gt;% 
+plotPartial(alpha = 0, pdp.col = "#1f78b4", contour = TRUE)
+```
+
+![](tidymodels_files/figure-html/unnamed-chunk-56-6.png)&lt;!-- --&gt;
+
+
+
+
+&lt;!-- library(vip) --&gt;
+&lt;!-- rf_ajuste2 %&gt;%  --&gt;
+&lt;!--   vip(geom = "point") --&gt;
+
+&lt;!-- ```{r} --&gt;
+&lt;!-- (mejor_exac &lt;- select_best(calibrar_res, "accuracy")) --&gt;
+&lt;!-- ``` --&gt;
+
+
+&lt;!-- ```{r, message=FALSE, warning=FALSE} --&gt;
+&lt;!-- library(tune) --&gt;
+&lt;!-- rf_ajuste &lt;- fit_resamples(object = rf_flujo,  --&gt;
+&lt;!--                            resamples = pinguinos_boot, --&gt;
+&lt;!--                            control = control_resamples(save_pred = TRUE)) --&gt;
+&lt;!-- ``` --&gt;
+
+
+&lt;!-- ```{r} --&gt;
+&lt;!-- collect_metrics(rf_ajuste) --&gt;
+&lt;!-- conf_mat_resampled(rf_ajuste) --&gt;
+
+&lt;!-- rf_ajuste %&gt;%  --&gt;
+&lt;!--   collect_predictions() %&gt;%  --&gt;
+&lt;!--   group_by(id) %&gt;%  --&gt;
+&lt;!--   precision(truth = especie,  --&gt;
+&lt;!--          estimate = .pred_class, --&gt;
+&lt;!--          event_level = "third") %&gt;%  --&gt;
+&lt;!--   summarize(mean(.estimate)) --&gt;
+&lt;!-- ``` --&gt;
+
+&lt;!-- # Aplicando la receta y ajustando el modelo a los datos  --&gt;
+
+&lt;!-- ```{r} --&gt;
+&lt;!-- rf_ajuste %&gt;%  collect_predictions() --&gt;
+&lt;!-- ``` --&gt;
+
+&lt;!-- --- --&gt;
+
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # Preparando los ingredientes --&gt;
+
+&lt;!-- ```{r} --&gt;
+&lt;!-- (pinguinos_prep &lt;- receta %&gt;%  --&gt;
+&lt;!--   prep(pinguinos_entren)) --&gt;
+&lt;!-- ``` --&gt;
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # Horneando los datos --&gt;
+
+&lt;!-- ```{r} --&gt;
+&lt;!-- (pinguinos_cocidos &lt;- bake(pinguinos_prep, new_data = NULL)) --&gt;
+&lt;!-- ``` --&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

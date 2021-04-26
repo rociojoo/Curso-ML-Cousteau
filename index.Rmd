@@ -87,19 +87,15 @@ https://rociojoo.github.io/
 
 **2.** Introducción al aprendizaje automático: 
   * ¿Qué es? Aprendizaje supervisado. Ejemplos de métodos y aplicación. 
-  Performance. Validación.
+  Performance. Validación. Interpretación. Otros aspectos.
 
 --
 
 **3.** Aprendizaje automático con tidymodels, gráficos de dependencia parcial e
-importancia de variables
+importancia de variables. Proyecto final.
 
---
 
-**4.** Otros aspectos del aprendizaje automático:
-  * Aprendizaje automatizado. Sesgos, sobre ajuste, data leakage
-
-! La duración de cada sub-módulo dependerá del avance del grupo
+La duración de cada sub-módulo dependerá del avance del grupo
 
 ---
 

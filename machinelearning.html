@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Aprendizaje automático</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Rocío Joo" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/chocolate-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Aprendizaje automático
+### Rocío Joo
+### Abril 2021
+
+---
+
+
+
+
+
+
+
+# Aprendizaje automático e Inteligencia artificial
+
+--
+
+&lt;img src="./img/ML-AI.png" title="black box, futurama robot, rabbit in a hat" alt="black box, futurama robot, rabbit in a hat" width="90%" style="display: block; margin: auto;" /&gt;
+
+.center[Caja negra de tecnología sofisticada + magia]
+
+---
+
+# Aprendizaje automático e Inteligencia artificial
+
+&lt;img src="./img/openbox1.png" title="open box" alt="open box" width="80%" style="display: block; margin: auto;" /&gt;
+
+.center[Abriremos la caja negra]
+
+---
+
+# Aprendizaje automático e Inteligencia artificial
+
+&lt;img src="./img/openbox2.png" title="rabbit magic trick" alt="rabbit magic trick" width="77%" style="display: block; margin: auto;" /&gt;
+
+.center[Encontraremos algoritmos para optimizar resultados.] 
+.center[Y podremos realizar los trucos de magia.]
+
+---
+
+# Aprendizaje automático e Inteligencia artificial
+
+Plan del módulo:
+
+1. Conceptos de aprendizaje automático e inteligencia artificial
+
+--
+
+2. Tipos de aprendizaje automático
+
+--
+
+3. Clasificación y regresión en aprendizaje supervisado
+
+--
+
+4. Árboles de decisión y bosques aleatorios
+
+--
+
+5. Entrenamiento y test
+
+--
+
+6. Medidas de desempeño del modelo
+
+--
+
+7. Herramientas para interpretar el modelo
+
+--
+
+8. Paquetes de R
+
+--
+
+9. Ética
+
+
+---
+
+# Aprendizaje automático e Inteligencia artificial
+
+&lt;img src="./img/ai-ml-scheme1.png" title="definiciones de AI y ML" alt="definiciones de AI y ML" width="80%" style="display: block; margin: auto;" /&gt;
+
+Modificado de [https://www.edureka.co/blog/](https://www.edureka.co/blog/ai-vs-machine-learning-vs-deep-learning/)
+
+---
+
+# Aprendizaje automático e Inteligencia artificial
+
+&lt;img src="./img/ai-ml-scheme2.png" title="definiciones de AI y ML" alt="definiciones de AI y ML" width="80%" style="display: block; margin: auto;" /&gt;
+
+Modificado de [https://www.edureka.co/blog/](https://www.edureka.co/blog/ai-vs-machine-learning-vs-deep-learning/)
+
+---
+
+# Aprendizaje automático e Inteligencia artificial
+
+&lt;img src="./img/ai-ml-scheme3.png" title="definiciones de AI y ML" alt="definiciones de AI y ML" width="80%" style="display: block; margin: auto;" /&gt;
+
+Modificado de [https://www.edureka.co/blog/](https://www.edureka.co/blog/ai-vs-machine-learning-vs-deep-learning/)
+
+---
+
+&lt;img src="./img/ml.jpeg" title="meme de estadistica y ml" alt="meme de estadistica y ml" width="60%" style="display: block; margin: auto;" /&gt;
+
+.center[Comic original de [sandserif](https://www.instagram.com/sandserifcomics/)]
+
+Es un poco más complicado que eso.
+
+---
+
+# Aprendizaje automático
+
+.pull-left[
+
+Tipos:
+
+  *   Aprendizaje supervisado
+
+  *   Aprendizaje no supervisado
+
+  *   Aprendizaje semi-supervisado
+
+  *   Aprendizaje por refuerzo
+]
+
+---
+
+# Aprendizaje automático
+
+.pull-left[
+
+Tipos
+
+  *   **Aprendizaje supervisado**
+
+  *   Aprendizaje no supervisado
+
+  *   Aprendizaje semi-supervisado
+
+  *   Aprendizaje por refuerzo
+]
+
+.pull-right[
+&lt;img src="./img/test.jpeg" title="aprendizaje supervisado: test de respuesta multiple" alt="aprendizaje supervisado: test de respuesta multiple" width="70%" style="display: block; margin: auto;" /&gt;
+
+Imagen de [ivywise.com](https://www.ivywise.com/ivywise-knowledgebase/resources/article/spring-standardized-testing-advice-for-sophomores-and-juniors/)
+]
+
+---
+
+# Aprendizaje automático
+
+  *   **Aprendizaje supervisado**
+
+&lt;img src="./img/Korpela.png" title="figura del paper de Korpela" alt="figura del paper de Korpela" width="70%" style="display: block; margin: auto;" /&gt;
+
+[Korpela et al. 2020](https://www.nature.com/articles/s42003-020-01356-8)
+
+
+---
+
+# Aprendizaje automático
+
+  *   **Aprendizaje no supervisado**
+
+&lt;img src="./img/unsupervised.png" title="aprendiza no supervisado" alt="aprendiza no supervisado" width="70%" style="display: block; margin: auto;" /&gt;
+
+Imagen de [learn.g2.com](https://learn.g2.com/supervised-vs-unsupervised-learning)
+
+---
+
+# Aprendizaje automático
+
+  *   **Aprendizaje no supervisado**
+
+&lt;img src="./img/Joo2014a.jpg" title="imagen del paper Joo et al 2014" alt="imagen del paper Joo et al 2014" width="60%" style="display: block; margin: auto;" /&gt;
+
+[Joo et al. 2014](https://www.sciencedirect.com/science/article/pii/S0079661114001323)
+
+---
+
+# Aprendizaje automático
+
+  *   **Aprendizaje no supervisado**
+
+&lt;img src="./img/Joo2014c.jpg" title="imagen del paper Joo et al 2014" alt="imagen del paper Joo et al 2014" width="100%" style="display: block; margin: auto;" /&gt;
+
+[Joo et al. 2014](https://www.sciencedirect.com/science/article/pii/S0079661114001323)
+
+
+---
+
+# Aprendizaje automático
+
+  *   **Aprendizaje semi-supervisado**
+
+&lt;img src="./img/semisupervised.jpeg" title="aprendizaje semisupervisado" alt="aprendizaje semisupervisado" width="60%" style="display: block; margin: auto;" /&gt;
+
+Imagen de [digitalvidya.com](https://www.digitalvidya.com/blog/semi-supervised-learning/)
+
+
+---
+
+# Aprendizaje automático
+
+  *   **Aprendizaje semi-supervisado**
+
+&lt;img src="./img/pnas_Methods_infographic.png" title="infografia del paper PNAS forced labor" alt="infografia del paper PNAS forced labor" width="55%" style="display: block; margin: auto;" /&gt;
+
+[McDonald et al. 2021](https://www.pnas.org/content/118/3/e2016238117)
+
+---
+
+# Aprendizaje automático
+
+  *   **Aprendizaje por refuerzo**
+
+&lt;img src="./img/reinforcement.png" title="reinforcement learning mario bros" alt="reinforcement learning mario bros" width="90%" style="display: block; margin: auto;" /&gt;
+
+Imagen de [freecodecamp.com](https://www.freecodecamp.org/news/a-brief-introduction-to-reinforcement-learning-7799af5840db/)
+
+
+---
+
+# Aprendizaje automático
+
+  *   **Aprendizaje por refuerzo**
+
+&lt;img src="./img/abm.png" title="fig de Lett 2008" alt="fig de Lett 2008" width="85%" style="display: block; margin: auto;" /&gt;
+
+[Lett and Mirabet 2008](http://www.scielo.org.za/pdf/sajs/v104n5-6/a0910406.pdf)
+
+---
+
+# Aprendizaje supervisado: clasificación y regresión
+
+--
+
+Objetivo: Ajustar un modelo que relacione la variable respuesta con las variables predictoras.
+
+  *   Clasificación:
+    *   La variable respuesta es categórica (i.e. definida por un número finito de clases)
+    *   El desempeño del modelo se mide contando clasificaciones correctas/incorrectas
+
+    * Ejm. predicción de presencia de plantas invasivas a partir de distancia a caminos urbanos
+    ([Cutler et al. 2007](https://pubmed.ncbi.nlm.nih.gov/18051647/))
+    o identificar operaciones de pesca a partir de posiciones GPS de embarcaciones ([Joo et al. 2011](https://www.sciencedirect.com/science/article/pii/S0304380010004539?via%3Dihub))
+
+---
+
+# Aprendizaje supervisado: clasificación y regresión
+
+  *   Regresión:
+    *   La variable respuesta es continua (generalmente)
+    *   El desempeño del modelo se mide sobre cuán lejano/cercano es el valor predicho respecto al real
+
+    * Ejm. predicción de mortalidad de especies bentónicas en colonias utilizando temperatura
+    ([Crisci et al. 2012](https://www.sciencedirect.com/science/article/pii/S0304380012001081?via%3Dihub))
+    o del flujo de carbono en bosques a partir de diferentes condiciones climáticas espacio-temporales
+    ([Liu et al. 2018](https://cdnsciencepub.com/doi/abs/10.1139/er-2018-0034))
+
+
+---
+
+# Aprendizaje supervisado: métodos
+
+--
+
+.pull-left[
+
+Algunos de los métodos más comunes:
+
+  * **Random forests o bosques aleatorios**
+
+  * Neural networks o redes neuronales
+
+  * Support vector machines o máquinas de vector soporte
+
+]
+
+.pull-right[
+&lt;img src="./img/classif_tree.png" title="classif_tree" alt="classif_tree" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Aprendizaje supervisado: métodos
+
+.pull-left[
+
+Algunos de los métodos más comunes:
+
+  * Random forests o bosques aleatorios
+
+  * **Neural networks o redes neuronales**
+
+  * Support vector machines o máquinas de vector soporte
+
+]
+
+.pull-right[
+&lt;img src="./img/ann.png" title="ann" alt="ann" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Aprendizaje supervisado: métodos
+
+.pull-left[
+
+Algunos de los métodos más comunes:
+
+  * Random forests o bosques aleatorios
+
+  * Neural networks o redes neuronales
+
+  * **Support vector machines o máquinas de vector soporte**
+
+]
+
+.pull-right[
+&lt;img src="./img/svm2.png" title="svm" alt="svm" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+En las refs, artículos de revisión de aplicaciones.
+
+---
+
+# Aprendizaje supervisado: métodos
+
+.pull-left[
+
+Algunos de los métodos más comunes:
+
+  * **Random forests o bosques aleatorios**
+
+  * Neural networks o redes neuronales
+
+  * Support vector machines o máquinas de vector soporte
+
+]
+
+---
+
+# Aprendizaje supervisado: bosques aleatorios
+
+&lt;img src="./img/rf.png" title="rf as a set of trees" alt="rf as a set of trees" width="50%" style="display: block; margin: auto;" /&gt;
+
+(Imagen de [dataversity.net](https://www.dataversity.net/from-a-single-decision-tree-to-a-random-forest/))
+
+---
+
+# Aprendizaje supervisado: árboles de decisión
+
+&lt;img src="./img/decision-tree.png" title="decision tree" alt="decision tree" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+(Imagen de [dataversity.net](https://www.dataversity.net/from-a-single-decision-tree-to-a-random-forest/))
+
+---
+
+# Aprendizaje supervisado: árboles de decisión
+
+Ejemplo de árbol de clasificación
+
+&lt;img src="./img/clas_tree.png" title="classification tree example" alt="classification tree example" width="80%" style="display: block; margin: auto;" /&gt;
+
+Imagen tomada de [medium](https://medium.datadriveninvestor.com/decision-trees-lesson-101-f00dad6cba21)
+
+---
+
+# Aprendizaje supervisado: árboles de decisión
+
+Ejemplo de árbol de regresión
+
+&lt;img src="./img/regression_tree.png" title="regression tree example" alt="regression tree example" width="39%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Aprendizaje supervisado: árboles de decisión
+
+.pull-left[
+
+&lt;img src="./img/decision-tree.png" title="decision tree" alt="decision tree" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+--
+
+.pull-right[
+
+  Árboles de decisión:
+
+  *   Modelo no lineal
+
+]
+
+---
+
+# Aprendizaje supervisado: árboles de decisión
+
+.pull-left[
+
+&lt;img src="./img/decision-tree.png" title="decision tree" alt="decision tree" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.pull-right[
+
+  Árboles de decisión:
+
+  *   Modelo no lineal
+
+  *   Estructura tipo diagrama de flujo
+
+]
+
+---
+
+# Aprendizaje supervisado: árboles de decisión
+
+.pull-left[
+
+&lt;img src="./img/decision-tree.png" title="decision tree" alt="decision tree" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.pull-right[
+
+  Árboles de decisión:
+
+  *   Modelo no lineal
+
+  *   Estructura tipo diagrama de flujo
+
+  *   Compuesto de nodos y ramas
+
+]
+
+---
+
+# Aprendizaje supervisado: árboles de decisión
+
+.pull-left[
+
+&lt;img src="./img/decision-tree.png" title="decision tree" alt="decision tree" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.pull-right[
+
+  Árboles de decisión:
+
+  *   Modelo no lineal
+
+  *   Estructura tipo diagrama de flujo
+
+  *   Compuesto de nodos y ramas
+
+  *   Usa reglas binarias en cada nodo para separar individuos en ramas
+
+]
+
+
+---
+
+# Aprendizaje supervisado: árboles de decisión
+
+.pull-left[
+
+&lt;img src="./img/decision-tree.png" title="decision tree" alt="decision tree" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.pull-right[
+
+  Árboles de decisión:
+
+  *   Modelo no lineal
+
+  *   Estructura tipo diagrama de flujo
+
+  *   Compuesto de nodos y ramas
+
+  *   Usa reglas binarias en cada nodo para separar individuos en ramas
+
+  *   Los nodos finales tienen una composición más homogénea respecto a la variable respuesta.
+
+]
+
+---
+
+# Aprendizaje supervisado: árboles de decisión
+
+.pull-left[
+
+&lt;img src="./img/decision-tree.png" title="decision tree" alt="decision tree" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.pull-right[
+
+El modelo debe determinar:
+
+  *   ¿Qué variable usar para partir en ramas?
+
+  *   ¿Cuál es el valor del corte?
+
+  *   ¿Cuándo parar de dividir en ramas?
+
+  *   ¿Qué valor de la variable respuesta para nodos terminales?
+
+]
+
+---
+
+# Aprendizaje supervisado: árboles de decisión
+
+Parámetros que podemos definir:
+
+  *   Criterio para particionar:
+
+      En general, minimizando la impureza de los nodos.
+
+      * En clasificación:
+
+        * Coeficiente de Gini
+        * Entropía
+
+      * En regresión:
+
+        * Diferencia de suma de cuadrados (del nodo padre respecto a los hijos)
+
+---
+
+# Aprendizaje supervisado: árboles de decisión
+
+Parámetros que podemos definir:
+
+  *   Gradiente de impureza
+
+  *   Mínimo número de observaciones por nodo
+
+  *   Profundidad máxima de los nodos terminales
+
+
+--
+
+
+¿Por qué los últimos dos?
+
+&lt;img src="./img/overfitting.png" title="overfitting" alt="overfitting" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Aprendizaje supervisado: bosques aleatorios
+
+.pull-left[
+
+&lt;img src="./img/rf.png" title="rf as a set of trees" alt="rf as a set of trees" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Aprendizaje supervisado: bosques aleatorios
+
+.pull-left[
+
+&lt;img src="./img/rf.png" title="rf as a set of trees" alt="rf as a set of trees" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+De árbol a bosque aleatorio:
+
+]
+
+---
+
+# Aprendizaje supervisado: bosques aleatorios
+
+.pull-left[
+
+&lt;img src="./img/rf.png" title="rf as a set of trees" alt="rf as a set of trees" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+De árbol a bosque aleatorio:
+
+  * Bosque compuesto por un conjunto de árboles
+
+]
+
+---
+
+# Aprendizaje supervisado: bosques aleatorios
+
+.pull-left[
+
+&lt;img src="./img/rf.png" title="rf as a set of trees" alt="rf as a set of trees" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+De árbol a bosque aleatorio:
+
+  * Bosque compuesto por un conjunto de árboles
+
+  * Para cada árbol se usa un boostrap de los datos
+
+]
+
+---
+
+# Aprendizaje supervisado: bosques aleatorios
+
+.pull-left[
+
+&lt;img src="./img/rf.png" title="rf as a set of trees" alt="rf as a set of trees" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+De árbol a bosque aleatorio:
+
+  * Bosque compuesto por un conjunto de árboles
+
+  * Para cada árbol se usa un boostrap de los datos
+
+  * Para particionar en ramas se puede usar más de una variable a la vez,
+  el subconjunto de variables para particionar en cada nodo se elige
+  aleatoriamente.
+
+]
+
+
+
+---
+
+# Aprendizaje supervisado: bosques aleatorios
+
+.pull-left[
+
+&lt;img src="./img/rf.png" title="rf as a set of trees" alt="rf as a set of trees" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+De árbol a bosque aleatorio:
+
+  * Bosque compuesto por un conjunto de árboles
+
+  * Para cada árbol se usa un boostrap de los datos
+
+  * Para particionar en ramas se puede usar más de una variable a la vez.
+
+  * Para la predicción final se promedia las predicciones de cada árbol.
+
+]
+
+
+---
+
+# Aprendizaje supervisado: bosques aleatorios
+
+.pull-left[
+
+&lt;img src="./img/rf.png" title="rf as a set of trees" alt="rf as a set of trees" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+Parámetros que podemos definir:
+
+  * Número de árboles en el bosque
+
+  * Número de variables a seleccionar para particionar desde cada nodo
+
+  * Parámetros de árboles de decisión (e.g. criterio para particionar,
+  tamaño de nodos, profundidad de nodos terminales)
+
+]
+
+---
+
+# Aprendizaje supervisado: entrenamiento y test
+
+Para medir la performance del modelo, utilizamos parte de los datos para entrenarlo (training), y otra parte para evaluarlo (test).
+
+&lt;img src="./img/train-test.png" title="scheme: training and test" alt="scheme: training and test" width="100%" style="display: block; margin: auto;" /&gt;
+
+Imagen de [EpochFail en wikipedia](https://commons.wikimedia.org/wiki/File:Supervised_machine_learning_in_a_nutshell.svg)
+
+---
+
+# Aprendizaje supervisado: entrenamiento y test
+
+Se pueden hacer múltiples y diferentes particiones en entrenamiento y test.
+
+Ejm: K-fold validation
+
+&lt;img src="./img/cv.png" title="K-fold validation" alt="K-fold validation" width="55%" style="display: block; margin: auto;" /&gt;
+
+Imagen de [scikit-learn.org](https://scikit-learn.org/stable/modules/cross_validation.html)
+
+
+---
+
+# Aprendizaje supervisado: entrenamiento y test
+
+Se pueden hacer múltiples y diferentes particiones en entrenamiento y test.
+
+Ejm: Bootstrapping
+
+&lt;img src="./img/bootstrap.png" title="Bootstrapping" alt="Bootstrapping" width="70%" style="display: block; margin: auto;" /&gt;
+
+Imagen de [uwesterr.de](http://machinelearningintro.uwesterr.de/MlAlgoTrees.html)
+
+---
+
+# Aprendizaje supervisado: medidas de desempeño
+
+Ya tenemos un plan para entrenar y evaluar el modelo.
+
+¿Cómo evaluarlo? Métricas sobre los resultados de predicción.
+
+--
+
+En regresión:
+
+* Raíz del error cuadrático medio
+
+`$$\sqrt{\sum_i^n{(\hat{y_i} - y_i)^2} /n}$$`
+
+* Error absoluto medio
+
+`$$\sum_i^n{|\hat{y_i} - {y_i}|} /n$$`
+
+---
+
+# Aprendizaje supervisado: medidas de desempeño
+
+En clasificación:
+
+Asumiendo dos clases: condición positiva y negativa (e.g. covid). 
+
+Matriz de confusión:
+
+ | Real + | Real -
+--------|--------|---------
+Pred + | Positivos verdaderos (PV) | Positivos falsos (PF)
+Pred - | Negativos falsos (NF) | Negativos verdaderos (NV)
+
+--
+
+* Accuracy o **Exactitud**: (de 0 a 1)
+
+`$$\frac{PV + NV}{PV + NF + PF + NV}$$` 
+
+¿Cuánto corresponde lo predicho con lo real?
+
+---
+
+# Aprendizaje supervisado: medidas de desempeño
+
+En clasificación:
+
+Asumiendo dos clases: condición positiva y negativa (e.g. covid). 
+
+Matriz de confusión:
+
+ | Real + | Real -
+--------|--------|---------
+Pred + | Positivos verdaderos (PV) | Positivos falsos (PF)
+Pred - | Negativos falsos (NF) | Negativos verdaderos (NV)
+
+
+* Sensitivity/recall/hit rate/true positive rate o **Sensibilidad**: (de 0 a 1)
+
+`$$\frac{PV}{PV + NF}$$` 
+
+De los positivos reales, ¿cuántos son correctamente predichos por el modelo?
+
+
+---
+
+# Aprendizaje supervisado: medidas de desempeño
+
+En clasificación:
+
+Asumiendo dos clases: condición positiva y negativa (e.g. covid). 
+
+Matriz de confusión:
+
+ | Real + | Real -
+--------|--------|---------
+Pred + | Positivos verdaderos (PV) | Positivos falsos (PF)
+Pred - | Negativos falsos (NF) | Negativos verdaderos (NV)
+
+
+* Specificity/selectivity/true negative rate o **Especificidad**: (de 0 a 1)
+
+`$$\frac{NV}{NV + PF}$$` 
+
+De los negativos reales, ¿cuántos son correctamente predichos por el modelo?
+
+
+---
+
+# Aprendizaje supervisado: medidas de desempeño
+
+En clasificación:
+
+Asumiendo dos clases: condición positiva y negativa (e.g. covid). 
+
+Matriz de confusión:
+
+ | Real + | Real -
+--------|--------|---------
+Pred + | Positivos verdaderos (PV) | Positivos falsos (PF)
+Pred - | Negativos falsos (NF) | Negativos verdaderos (NV)
+
+
+* Precision/positive predictive value o **Precisión**: (de 0 a 1)
+
+`$$\frac{PV}{PV + PF}$$` 
+
+De los positivos que predecimos, ¿cuántos son verdaderos?
+
+
+---
+
+# Aprendizaje supervisado: medidas de desempeño
+
+En clasificación:
+
+.pull-left[
+
+* Exactitud `$$\frac{PV + NV}{PV + NF + PF + NV}$$` 
+
+* Sensibilidad `$$\frac{PV}{PV + NF}$$` 
+
+]
+
+.pull-right[
+
+* Especificidad `$$\frac{NV}{NV + PF}$$` 
+
+* Precisión `$$\frac{PV}{PV + PF}$$` 
+
+]
+
+¿Cuál escoger? En la práctica, es difícil que todo sea perfecto.
+
+---
+
+# Aprendizaje supervisado: medidas de desempeño
+
+En clasificación:
+
+.pull-left[
+
+* Exactitud `$$\frac{PV + NV}{PV + NF + PF + NV}$$` 
+
+* Sensibilidad `$$\frac{PV}{PV + NF}$$` 
+
+]
+
+.pull-right[
+
+* Especificidad `$$\frac{NV}{NV + PF}$$` 
+
+* Precisión `$$\frac{PV}{PV + PF}$$` 
+
+]
+
+*   F1: media harmónica de precisión y sensibilidad
+
+`$$2 \times \frac{\text{Precision} \times \text{Sensibilidad}}{\text{Precision} + \text{Sensibilidad}} = \frac{2 \times PV}{2\times PV + PF + NF}$$`
+
+---
+
+# Aprendizaje supervisado: medidas de desempeño
+
+* AUC: Area under the curve o área bajo la curva ROC.
+
+&lt;img src="./img/ROC_space.png" title="ROC space example" alt="ROC space example" width="40%" style="display: block; margin: auto;" /&gt;
+
+Imagen de [Indon en wikipedia](https://commons.wikimedia.org/wiki/File:ROC_space.png)
+
+---
+
+# Aprendizaje supervisado: medidas de desempeño
+
+* Utilizando umbrales de clasificación, se pueden construir curvas ROC
+
+* El área bajo la curva se puede usar para comparar modelos
+
+&lt;img src="./img/sensitivity_specificity_classifier_curves.jpg" title="ROC curve example" alt="ROC curve example" width="48%" style="display: block; margin: auto;" /&gt;
+
+Imagen de [datacadamia.com](https://datacadamia.com/_detail/data_mining/sensitivity_specificity_classifier_curves.jpg?id=data_mining%3Aroc)
+
+---
+
+# Aprendizaje supervisado: interpretando el modelo
+
+--
+
+Contribución de las variables al modelo o importancia de variables:
+
+* La importancia de cada variable es calculada independientemente. 
+
+--
+
+* Una variable es importante si ignorándola se pierde en exactitud o en homogeneidad de los nodos terminales. 
+
+--
+
+* Para calcular la importancia de una variable por permutación, 
+se compara la exactitud en la predicción 
+entre el modelo ajustado de manera normal, y uno en el que los valores de la variable fueron permutados. 
+
+---
+
+# Aprendizaje supervisado: interpretando el modelo
+
+Importancia de variables:
+
+Ejemplo: prediciendo el valor monetario de jugadores FIFA.
+
+
+&lt;img src="./img/08-interpretation-dalex-011-1.png" title="Permutation importance FIFA example" alt="Permutation importance FIFA example" width="70%" style="display: block; margin: auto;" /&gt;
+
+Datos de [sofifa.com](https://sofifa.com/), cálculos e imagen de [DALEX](https://mlr3book.mlr-org.com/dalex.html)
+
+---
+
+# Aprendizaje supervisado: interpretando el modelo
+
+La importancia no dice nada sobre la forma de la relación entre las variables predictoras y la variable a predecir. 
+
+--
+
+Gráfico de dependencia parcial:
+
+* Muestra el efecto marginal de una variable predictora en la predicción,
+asumiendo valores promedios de las otras.
+
+* Puede mostrar si la relación es lineal, monotónica o más compleja. 
+
+---
+
+# Aprendizaje supervisado: interpretando el modelo
+
+Gráfico de dependencia parcial del ejemplo FIFA
+
+&lt;img src="./img/08-interpretation-dalex-013-1.png" title="Parcial dependence plot FIFA example" alt="Parcial dependence plot FIFA example" width="80%" style="display: block; margin: auto;" /&gt;
+
+Imagen de [DALEX](https://mlr3book.mlr-org.com/dalex.html)
+
+---
+
+# Aprendizaje automático en R
+
+* Una visita al universo de [machine learning en R](https://cran.r-project.org/web/views/MachineLearning.html).
+
+&lt;img src="./img/packages.jpeg" title="packages" alt="packages" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Aprendizaje automático: ética
+
+&lt;img src="./img/With-great-power-comes-great-responsibility.jpg" title="with great power comes great responsibility" alt="with great power comes great responsibility" width="100%" style="display: block; margin: auto;" /&gt;
+
+Imagen de [magicalquote.com](https://www.magicalquote.com/movie/spider-man/)
+
+---
+
+# Aprendizaje automático: ética
+
+* El aprendizaje no puede ser tan automático
+
+* Pensar en qué queremos lograr
+
+* Cuáles son los sesgos de nuestros datos
+
+* Qué variables tienen sentido
+
+* Qué estamos optimizando
+
+* Qué conclusiones estamos sacando
+
+---
+
+# Bibliografía
+
+Para preparar esta unidad se utilizó:
+
+* Curso ["A statistical view of deep learning in ecology"](https://www.stat.colostate.edu/~jah/talks_public_html/isec2020/index.html)
+de Jennifer Hoeting, en virtual International Statistical Ecology Conference. Slides y video.
+
+* Crisci, C., Ghattas, B., &amp; Perera, G. (2012). 
+[A review of supervised machine learning algorithms and their applications to ecological data.](https://doi.org/10.1016/j.ecolmodel.2012.03.001) 
+Ecological Modelling, 240, 113–122. 
+
+* [Sensitivity and specificity.](https://en.wikipedia.org/wiki/Sensitivity_and_specificity) Wikipedia page.
+
+* Molnar (2021). [A guide for making black box models explainable.](https://christophm.github.io/interpretable-ml-book/) Book. 
+
+---
+
+# Bibliografía
+
+Más recomendaciones:
+
+* [Reinforcement Learning: Crash Course AI#9](https://www.youtube.com/watch?v=nIgIv4IfJ6s). Video.
+
+* [Cross-validation](https://www.youtube.com/watch?v=7062skdX05Y). Video
+
+* [Topics in data ethics](http://machinelearningintro.uwesterr.de/topics-in-data-ethics.html).
+
+* Christin, S., Hervet, É., &amp; Lecomte, N. (2019). 
+[Applications for deep learning in ecology.](https://doi.org/10.1111/2041-210X.13256) 
+Methods in Ecology and Evolution, 10(10), 1632–1644. 
+
+* Cutler, D. R., Edwards, T. C., Beard, K. H., Cutler, A., Hess, K. T., Gibson, J., &amp; Lawler, J. J. (2007). 
+[Random forests for classification in ecology.](https://pubmed.ncbi.nlm.nih.gov/18051647/) Ecology, 88(11), 2783–2792.
+
+---
+
+# Bibliografía
+
+Aún más:
+
+* Lucas, T. C. D. (2020). 
+[A translucent box: Interpretable machine learning in ecology.](https://doi.org/10.1002/ecm.1422) 
+Ecological Monographs, 90(4), e01422. 
+
+* Lum, K., &amp; Isaac, W. (2016). 
+[To predict and serve?](https://doi.org/10.1111/j.1740-9713.2016.00960.x) 
+Significance, 13(5), 14–19. 
+
+* Maksymiuk, S., Gosiewska, A., &amp; Biecek, P. (2020). 
+[Landscape of R packages for eXplainable Artificial Intelligence.](http://arxiv.org/abs/2009.13248) ArXiv:2009.13248 [Cs, Stat]. 
+
+* Olden, J. D., Lawler, J. J., &amp; Poff, N. L. (2008). [Machine learning methods without tears: A primer for ecologists.](https://pubmed.ncbi.nlm.nih.gov/18605534/) The Quarterly Review of Biology, 83(2), 171–193.
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
