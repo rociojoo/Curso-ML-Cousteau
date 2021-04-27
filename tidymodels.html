@@ -1487,30 +1487,48 @@ partial(rf_ajuste3,
           pred.var = "largo_pico_mm",
           pred.fun = pdp_pred_fun,
           train = pinguinos, center = FALSE) %&gt;% 
-plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
+plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, 
+            alpha = 0, pdp.col = "#1f78b4")
 ```
 
 ![](tidymodels_files/figure-html/unnamed-chunk-60-1.png)&lt;!-- --&gt;
+
+---
+
+# Graficando la dependencia parcial
+
 
 ```r
 partial(rf_ajuste3,
           pred.var = "alto_pico_mm",
           pred.fun = pdp_pred_fun,
           train = pinguinos, center = FALSE) %&gt;% 
-plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
+plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, 
+            alpha = 0, pdp.col = "#1f78b4")
 ```
 
-![](tidymodels_files/figure-html/unnamed-chunk-60-2.png)&lt;!-- --&gt;
+![](tidymodels_files/figure-html/unnamed-chunk-61-1.png)&lt;!-- --&gt;
+
+---
+
+# Graficando la dependencia parcial
+
 
 ```r
 partial(rf_ajuste3,
           pred.var = "masa_corporal_g",
           pred.fun = pdp_pred_fun,
           train = pinguinos, center = FALSE) %&gt;% 
-plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
+plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, 
+            alpha = 0, pdp.col = "#1f78b4")
 ```
 
-![](tidymodels_files/figure-html/unnamed-chunk-60-3.png)&lt;!-- --&gt;
+![](tidymodels_files/figure-html/unnamed-chunk-62-1.png)&lt;!-- --&gt;
+
+---
+
+# Graficando la dependencia parcial
+
 
 ```r
 partial(rf_ajuste3,
@@ -1520,7 +1538,12 @@ partial(rf_ajuste3,
 plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
 ```
 
-![](tidymodels_files/figure-html/unnamed-chunk-60-4.png)&lt;!-- --&gt;
+![](tidymodels_files/figure-html/unnamed-chunk-63-1.png)&lt;!-- --&gt;
+
+---
+
+# Graficando la dependencia parcial
+
 
 ```r
 partial(rf_ajuste3,
@@ -1530,7 +1553,7 @@ partial(rf_ajuste3,
 plotPartial(alpha = 0, pdp.col = "#1f78b4", contour = TRUE)
 ```
 
-![](tidymodels_files/figure-html/unnamed-chunk-60-5.png)&lt;!-- --&gt;
+![](tidymodels_files/figure-html/unnamed-chunk-64-1.png)&lt;!-- --&gt;
 
 
 

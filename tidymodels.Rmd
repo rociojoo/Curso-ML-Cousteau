@@ -1052,41 +1052,53 @@ pdp_pred_fun <- function(object, newdata) {
 
 # Graficando la dependencia parcial
 
-```{r, message=FALSE, warning=FALSE}             
-partial(rf_ajuste3,
-          pred.var = "largo_pico_mm",
-          pred.fun = pdp_pred_fun,
-          train = pinguinos, center = FALSE) %>% 
-plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
-    
-partial(rf_ajuste3,
-          pred.var = "alto_pico_mm",
-          pred.fun = pdp_pred_fun,
-          train = pinguinos, center = FALSE) %>% 
-plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
-    
+```{r, message=FALSE, warning=FALSE, fig.height=4}             
 partial(rf_ajuste3,
           pred.var = "masa_corporal_g",
           pred.fun = pdp_pred_fun,
           train = pinguinos, center = FALSE) %>% 
-plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
-  
-    
-partial(rf_ajuste3,
-          pred.var = "especie",
-          pred.fun = pdp_pred_fun,
-          train = pinguinos, center = FALSE) %>% 
-plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
-  
-partial(rf_ajuste3,
-          pred.var = c("alto_pico_mm","masa_corporal_g"),
-          pred.fun = pdp_pred_fun,
-          train = pinguinos, center = FALSE) %>% 
-plotPartial(alpha = 0, pdp.col = "#1f78b4", contour = TRUE)
+plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, 
+            alpha = 0, pdp.col = "#1f78b4")
+```
 
+---
+
+# Graficando la dependencia parcial
+
+```{r, message=FALSE, warning=FALSE, fig.height=4}             
+partial(rf_ajuste3,
+          pred.var = "alto_pico_mm",
+          pred.fun = pdp_pred_fun,
+          train = pinguinos, center = FALSE) %>% 
+plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, 
+            alpha = 0, pdp.col = "#1f78b4")
+```
+
+---
+
+# Graficando la dependencia parcial
+
+```{r, message=FALSE, warning=FALSE, fig.height=4}             
+partial(rf_ajuste3,
+          pred.var = "largo_pico_mm",
+          pred.fun = pdp_pred_fun,
+          train = pinguinos, center = FALSE) %>% 
+plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, 
+            alpha = 0, pdp.col = "#1f78b4")
 ```
 
 
+
+---
+
+# Ejercicio de aplicación
+
+
+---
+
+# Bibliografía
+
+Para preparar esta unidad se utilizó:
 
 
 <!-- library(vip) -->
