@@ -1484,7 +1484,7 @@ pdp_pred_fun &lt;- function(object, newdata) {
 
 ```r
 partial(rf_ajuste3,
-          pred.var = "largo_pico_mm",
+          pred.var = "masa_corporal_g",
           pred.fun = pdp_pred_fun,
           train = pinguinos, center = FALSE) %&gt;% 
 plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, 
@@ -1516,7 +1516,7 @@ plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE,
 
 ```r
 partial(rf_ajuste3,
-          pred.var = "masa_corporal_g",
+          pred.var = "largo_pico_mm",
           pred.fun = pdp_pred_fun,
           train = pinguinos, center = FALSE) %&gt;% 
 plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, 
@@ -1525,35 +1525,51 @@ plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE,
 
 ![](tidymodels_files/figure-html/unnamed-chunk-62-1.png)&lt;!-- --&gt;
 
----
-
-# Graficando la dependencia parcial
-
-
-```r
-partial(rf_ajuste3,
-          pred.var = "especie",
-          pred.fun = pdp_pred_fun,
-          train = pinguinos, center = FALSE) %&gt;% 
-plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
-```
-
-![](tidymodels_files/figure-html/unnamed-chunk-63-1.png)&lt;!-- --&gt;
 
 ---
 
-# Graficando la dependencia parcial
+# Bibliografía
+
+Para preparar esta unidad se utilizó:
+
+* [Tidy Modeling with R](https://www.tmwr.org/). Max Kuhn and Julia Silge. Book. 
+
+* [Tidymodels page](https://www.tidymodels.org/)
+
+* [Un tour por tidymodels](https://www.youtube.com/watch?v=o38PVdS3k_Q). Ana Laura Diedrichs. RLadies Buenos Aires. Video.
+
+* [Tidymodels R Ladies talk](https://github.com/rlbarter/tidymodels_talk). Rebecca Barter. RLadies Baltimore. Notebook.
+
+* [Get started with tidymodels and #TidyTuesday Palmer penguins](https://juliasilge.com/blog/palmer-penguins/). Julia Silge. Blog post and video.
+
+---
+
+# Bibliografía
+
+Para preparar esta unidad se utilizó:
+
+* [Dials, Tune, and Parsnip: Tidymodels’ Way to Create and Tune Model Parameters](https://towardsdatascience.com/dials-tune-and-parsnip-tidymodels-way-to-create-and-tune-model-parameters-c97ba31d6173). Yu En Hsu. Blog post.
+
+* [Tuning random forest hyperparameters with tidymodels](https://www.youtube.com/watch?v=ts5bRZ7pRKQ). Julia Silge. Video.
+
+* [Tidymodels: tidy machine learning in R](http://www.rebeccabarter.com/blog/2020-03-25_machine_learning/#tune-the-parameters). Rebecca Barter. Blog post.
+
+* [How to use `pdp:: partial()` in `tidymodels`](https://community.rstudio.com/t/how-to-use-pdp-partial-in-tidymodels/69735). Forum.
+
+---
+
+# Bibliografía
+
+Más recomendaciones:
+
+* [Different random forest packages in R](https://www.linkedin.com/pulse/different-random-forest-packages-r-madhur-modi/). LinkedIn post.
+
+* [tidymodels, rpart, and pengnuins](https://koderkow.rbind.io/post/tidymodels-rpart-and-pengnuins/). Kyle Harris. Blog post. 
 
 
-```r
-partial(rf_ajuste3,
-          pred.var = c("alto_pico_mm","masa_corporal_g"),
-          pred.fun = pdp_pred_fun,
-          train = pinguinos, center = FALSE) %&gt;% 
-plotPartial(alpha = 0, pdp.col = "#1f78b4", contour = TRUE)
-```
+---
 
-![](tidymodels_files/figure-html/unnamed-chunk-64-1.png)&lt;!-- --&gt;
+# Ejercicio de aplicación
 
 
 
