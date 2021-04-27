@@ -1088,17 +1088,19 @@ plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE,
 ```
 
 
+---
+
+# Bibliografía
+
+Para preparar esta unidad se utilizó:
+
+
 
 ---
 
 # Ejercicio de aplicación
 
 
----
-
-# Bibliografía
-
-Para preparar esta unidad se utilizó:
 
 
 <!-- library(vip) -->
