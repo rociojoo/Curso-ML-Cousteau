@@ -730,9 +730,7 @@ De árbol a bosque aleatorio:
 
   * Para cada árbol se usa un boostrap de los datos
 
-  * Para particionar en ramas se puede usar más de una variable a la vez,
-  el subconjunto de variables para particionar en cada nodo se elige
-  aleatoriamente.
+  * Para particionar en ramas se puede usar más de una variable a la vez
 
 ]
 
@@ -758,9 +756,9 @@ De árbol a bosque aleatorio:
 
   * Para cada árbol se usa un boostrap de los datos
 
-  * Para particionar en ramas se puede usar más de una variable a la vez.
+  * Para particionar en ramas se puede usar más de una variable a la vez
 
-  * Para la predicción final se promedia las predicciones de cada árbol.
+  * Para la predicción final se promedia las predicciones de cada árbol
 
 ]
 

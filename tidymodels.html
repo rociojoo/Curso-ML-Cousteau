@@ -1460,20 +1460,29 @@ importancia %&gt;%
 
 # Graficando la dependencia parcial
 
+Primero creamos una función para especificar 
+* qué objeto se usa para predecir
+* sobre qué datos
+* qué clase de predicción
+* y cómo se llama la columna de predicción
+
+Es necesario para la función `partial`
+
 
 ```r
 library(pdp)
 
-# From ?partial:
-# `pred.fun`: Optional prediction function that requires two arguments:
-#             `object` and `newdata`. If specified, then the function must
-#              return a single prediction or a vector of predictions (i.e., not
-#              a matrix or data frame). Default is NULL.
 pdp_pred_fun &lt;- function(object, newdata) {
   predict(object, newdata, type = "class")$.pred_class
 }
+```
 
-             
+---
+
+# Graficando la dependencia parcial
+
+
+```r
 partial(rf_ajuste3,
           pred.var = "largo_pico_mm",
           pred.fun = pdp_pred_fun,
@@ -1481,7 +1490,7 @@ partial(rf_ajuste3,
 plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
 ```
 
-![](tidymodels_files/figure-html/unnamed-chunk-59-1.png)&lt;!-- --&gt;
+![](tidymodels_files/figure-html/unnamed-chunk-60-1.png)&lt;!-- --&gt;
 
 ```r
 partial(rf_ajuste3,
@@ -1491,7 +1500,7 @@ partial(rf_ajuste3,
 plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
 ```
 
-![](tidymodels_files/figure-html/unnamed-chunk-59-2.png)&lt;!-- --&gt;
+![](tidymodels_files/figure-html/unnamed-chunk-60-2.png)&lt;!-- --&gt;
 
 ```r
 partial(rf_ajuste3,
@@ -1501,7 +1510,7 @@ partial(rf_ajuste3,
 plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
 ```
 
-![](tidymodels_files/figure-html/unnamed-chunk-59-3.png)&lt;!-- --&gt;
+![](tidymodels_files/figure-html/unnamed-chunk-60-3.png)&lt;!-- --&gt;
 
 ```r
 partial(rf_ajuste3,
@@ -1511,7 +1520,7 @@ partial(rf_ajuste3,
 plotPartial(rug = FALSE, center = FALSE, levelplot = FALSE, alpha = 0, pdp.col = "#1f78b4")
 ```
 
-![](tidymodels_files/figure-html/unnamed-chunk-59-4.png)&lt;!-- --&gt;
+![](tidymodels_files/figure-html/unnamed-chunk-60-4.png)&lt;!-- --&gt;
 
 ```r
 partial(rf_ajuste3,
@@ -1521,7 +1530,7 @@ partial(rf_ajuste3,
 plotPartial(alpha = 0, pdp.col = "#1f78b4", contour = TRUE)
 ```
 
-![](tidymodels_files/figure-html/unnamed-chunk-59-5.png)&lt;!-- --&gt;
+![](tidymodels_files/figure-html/unnamed-chunk-60-5.png)&lt;!-- --&gt;
 
 
 

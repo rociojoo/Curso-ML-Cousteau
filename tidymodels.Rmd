@@ -1032,19 +1032,27 @@ importancia %>%
 
 # Graficando la dependencia parcial
 
+Primero creamos una función para especificar 
+* qué objeto se usa para predecir
+* sobre qué datos
+* qué clase de predicción
+* y cómo se llama la columna de predicción
+
+Es necesario para la función `partial`
+
 ```{r, message=FALSE, warning=FALSE}
 library(pdp)
 
-# From ?partial:
-# `pred.fun`: Optional prediction function that requires two arguments:
-#             `object` and `newdata`. If specified, then the function 
-#             must return a single prediction or a vector of 
-#             predictions (i.e., not a matrix or data frame). Default is NULL.
 pdp_pred_fun <- function(object, newdata) {
   predict(object, newdata, type = "class")$.pred_class
 }
+```
 
-             
+---
+
+# Graficando la dependencia parcial
+
+```{r, message=FALSE, warning=FALSE}             
 partial(rf_ajuste3,
           pred.var = "largo_pico_mm",
           pred.fun = pdp_pred_fun,
